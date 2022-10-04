@@ -1,0 +1,42 @@
+.sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-item:first-of-type {
+    border-radius: 4px 0 0 4px;
+  }
+
+  &-item:last-of-type {
+    border-radius: 0 4px 4px 0;
+  }
+
+  &-item {
+    display: block;
+    position: relative;
+    color: #fdfdfe;
+    padding: 0.75rem 1.5rem;
+    background-color: #ca0001;
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    outline: 0;
+
+    &.active {
+      background-color: #c01b26;
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: 45%;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-top: solid 4px #ffffff;
+        border-left: solid 4px transparent;
+        border-right: solid 4px transparent;
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
