@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import ProductList from "../../components/ProductList/ProductList";
+import "./homePage.scss";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -14,13 +16,29 @@ const HomePage = () => {
       });
   }, []);
 
+  const onProductCardActionClick = (productId) => {
+    fetch(`https://golden-whispering-show.glitch.me/${productId}`, {
+      method: "DELETE",
+    }).then((response) => {
+      if (response.status === 200) {
+        setProducts((prevState) =>
+          prevState.filter((product) => product.id !== productId)
+        );
+      }
+    });
+  };
+
   return (
-    <div>
-      <h1>Prekės</h1>
+    <div className="home-page">
       {isLoading && <p>Loading...</p>}
-      {products.map((product) => (
-        <p key={product.id}>{product.title}</p>
-      ))}
+      {!isLoading && (
+        <ProductList
+          products={products}
+          title="Ypatingi pasiūlymai"
+          productCardActionBtnLabel="Ištrinti produktą"
+          onProductCardActionClick={onProductCardActionClick}
+        />
+      )}
     </div>
   );
 };
